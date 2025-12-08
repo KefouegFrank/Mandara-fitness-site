@@ -1,36 +1,210 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mandara Fitness
 
-## Getting Started
+A full-stack fitness platform connecting coaches with clients. Built with Next.js 16, TypeScript, Prisma, and PostgreSQL.
 
-First, run the development server:
+## Features
+
+- 🔐 JWT-based authentication with role-based access control
+- 💬 Real-time chat between coaches and clients (Pusher)
+- 📸 Media uploads (certificates, photos, videos) to AWS S3/MinIO
+- 👨‍🏫 Coach onboarding and admin approval workflow
+- 🛡️ Input validation with Zod
+- 📊 Structured logging with Pino
+- 🧪 Unit tests with Vitest
+- ⚡ Rate limiting and request tracking
+- 🐳 Docker Compose for local development
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL 14+
+- Docker & Docker Compose (for MinIO and local dev)
+- pnpm (recommended) or npm
+
+### Installation
+
+1. **Clone and install dependencies:**
+   ```bash
+   git clone <repo-url>
+   cd mandara-fitness
+   pnpm install
+   ```
+
+2. **Configure environment:**
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your configuration
+   # IMPORTANT: Set JWT_SECRET to a secure random value!
+   ```
+
+3. **Setup database:**
+   ```bash
+   # Start PostgreSQL (via Docker Compose if using it)
+   docker-compose up -d postgres minio nginx
+
+   # Run migrations
+   pnpm prisma:migrate
+
+   # Generate Prisma Client
+   pnpm prisma:generate
+   ```
+
+4. **Start development server:**
+   ```bash
+   pnpm dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000)
+
+## Development
+
+### Available Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Development server with hot reload
 pnpm dev
-# or
-bun dev
+
+# Build for production
+pnpm build
+
+# Start production server
+pnpm start
+
+# Run linter
+pnpm lint
+
+# Run tests
+pnpm test
+
+# Run tests with UI
+pnpm test:ui
+
+# Generate coverage report
+pnpm test:coverage
+
+# Prisma database operations
+pnpm prisma:migrate      # Create and apply migrations
+pnpm prisma:generate     # Generate Prisma Client
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Database Migrations
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Create a new migration after schema changes
+pnpm prisma:migrate
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# View Prisma Studio (interactive database browser)
+npx prisma studio
+```
 
-## Learn More
+### Testing
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Run all tests
+pnpm test
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Watch mode (re-run on file changes)
+pnpm test --watch
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Run specific test file
+pnpm test auth.test.ts
 
-## Deploy on Vercel
+# Generate coverage report
+pnpm test:coverage
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── api/               # API route handlers
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── lib/
+│   ├── auth.ts           # JWT utilities
+│   ├── prisma.ts         # Prisma client singleton
+│   ├── aws-s3.ts         # S3/MinIO operations
+│   ├── validation.ts     # Input validation
+│   ├── schemas.ts        # Zod validation schemas
+│   ├── logger.ts         # Structured logging
+│   └── rate-limit.ts     # Rate limiting
+├── middleware.ts          # Next.js middleware
+└── __tests__/            # Test files
+
+docker-compose.yml         # Local development services
+API.md                     # API documentation
+.env.example               # Environment variables template
+```
+
+## Documentation
+
+- **[API.md](./API.md)** - Complete API documentation with examples
+- **[Architecture Decisions](./ARCHITECTURE.md)** - System design and choices
+- **[Testing Guide](./TESTING.md)** - How to write and run tests
+
+## Database
+
+See `prisma/schema.prisma` for the complete database schema.
+
+### Key Models
+
+- **User** - Authentication and user profile
+- **CoachProfile** - Coach-specific information
+- **ClientProfile** - Client measurements and preferences
+- **Chat** - Conversations between coaches and clients
+- **Message** - Chat messages
+- **Media** - Uploaded files (certificates, photos, videos)
+- **AdminReview** - Coach approval/rejection decisions
+
+## Security
+
+- ✅ JWT tokens (7-day expiration)
+- ✅ Password hashing with bcrypt
+- ✅ Rate limiting (5 req/15min auth, 100 req/15min API)
+- ✅ Input validation with Zod
+- ✅ File type and size validation
+- ✅ CORS protection
+- ✅ SQL injection prevention (Prisma ORM)
+
+## Environment Setup
+
+```bash
+# Generate secure JWT secret
+openssl rand -hex 32
+
+# Copy template and configure
+cp .env.example .env.local
+```
+
+See `.env.example` for all available configuration options.
+
+## Deployment
+
+### Docker
+
+```bash
+docker build -t mandara-fitness .
+docker run -p 3000:3000 -e DATABASE_URL=... mandara-fitness
+```
+
+### Kubernetes
+
+Deploy using Kubernetes manifests in `k8s/` directory.
+
+## Contributing
+
+1. Create a feature branch
+2. Make changes and add tests
+3. Run `pnpm test` and `pnpm lint`
+4. Submit a pull request
+
+## License
+
+MIT
+
+## Support
+
+For issues or questions: `support@mandara-fitness.com`

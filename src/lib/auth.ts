@@ -2,22 +2,21 @@ import jwt from 'jsonwebtoken';
 import { NextRequest } from 'next/server';
 import bcrypt from 'bcrypt';
 
-// Use a secure secret in production. For development a fallback exists but
-// code will warn if running in production without a secret.
-const JWT_SECRET = process.env.JWT_SECRET || '';
+// JWT_SECRET is required in all environments
+const JWT_SECRET = process.env.JWT_SECRET;
 
-if (!JWT_SECRET && process.env.NODE_ENV === 'production') {
-    throw new Error('JWT_SECRET must be set in production');
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable must be set. Please configure it in your .env.local file.');
 }
 
 export function signJwt(payload: object, expiresIn = '7d') {
-    return jwt.sign(payload, JWT_SECRET || 'dev-secret-placeholder', { expiresIn });
+    return jwt.sign(payload, JWT_SECRET, { expiresIn });
 }
 
 export function verifyJwt(token?: string) {
     if (!token) return null;
     try {
-        return jwt.verify(token, JWT_SECRET || 'dev-secret-placeholder') as any;
+        return jwt.verify(token, JWT_SECRET) as any;
     } catch (e) {
         return null;
     }

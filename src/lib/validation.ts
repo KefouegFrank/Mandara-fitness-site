@@ -46,14 +46,68 @@ export function isValidMediaMimeType(mimeType: string): boolean {
 }
 
 /**
+ * Validate file size (in bytes).
+ * Default max: 50MB (52,428,800 bytes)
+ */
+export function isValidFileSize(fileSizeBytes: number, maxSizeBytes = 52428800): boolean {
+    return fileSizeBytes > 0 && fileSizeBytes <= maxSizeBytes;
+}
+
+/**
  * Sanitize filename for S3 storage.
+ * Removes special characters and limits length to prevent issues.
  */
 export function sanitizeFileName(fileName: string): string {
-    return fileName
+    // Remove extension temporarily
+    const lastDot = fileName.lastIndexOf('.');
+    const name = lastDot > 0 ? fileName.substring(0, lastDot) : fileName;
+    const ext = lastDot > 0 ? fileName.substring(lastDot) : '';
+
+    // Sanitize name: lowercase, replace special chars with underscores
+    const sanitized = name
         .toLowerCase()
         .replace(/[^a-z0-9._-]/g, '_')
         .replace(/_+/g, '_')
         .substring(0, 255);
+
+    return sanitized + ext;
+}
+
+/**
+ * Validate and sanitize file upload.
+ * Returns object with validation result and sanitized filename.
+ */
+export function validateFileUpload(
+    fileName: string,
+    mimeType: string,
+    fileSizeBytes: number,
+    maxSizeBytes = 52428800,
+): { valid: boolean; sanitizedFileName?: string; error?: string } {
+    if (!fileName || fileName.trim().length === 0) {
+        return { valid: false, error: 'File name is required' };
+    }
+
+    if (!mimeType || mimeType.trim().length === 0) {
+        return { valid: false, error: 'MIME type is required' };
+    }
+
+    if (!isValidMediaMimeType(mimeType)) {
+        return {
+            valid: false,
+            error: `Invalid file type. Allowed types: ${['PDF', 'JPEG', 'PNG', 'WebP', 'MP4', 'QuickTime'].join(', ')}`,
+        };
+    }
+
+    if (!isValidFileSize(fileSizeBytes, maxSizeBytes)) {
+        const maxMB = Math.round(maxSizeBytes / 1024 / 1024);
+        return {
+            valid: false,
+            error: `File size cannot exceed ${maxMB}MB`,
+        };
+    }
+
+    const sanitizedFileName = sanitizeFileName(fileName);
+    return { valid: true, sanitizedFileName };
 }
 
 /**
