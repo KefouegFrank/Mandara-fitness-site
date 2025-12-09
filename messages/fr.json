@@ -1,0 +1,199 @@
+{
+  "common": {
+    "appName": "Mandara Fitness",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "submit": "Soumettre",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "viewMore": "Voir Plus",
+    "learnMore": "En Savoir Plus"
+  },
+  "nav": {
+    "home": "Accueil",
+    "coaches": "Trouver un Coach",
+    "about": "À Propos",
+    "contact": "Contact",
+    "dashboard": "Tableau de Bord",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "signUp": "S'inscrire"
+  },
+  "auth": {
+    "loginTitle": "Bon Retour",
+    "loginSubtitle": "Connectez-vous à votre compte",
+    "registerTitle": "Rejoignez Mandara Fitness",
+    "registerSubtitle": "Commencez votre parcours fitness aujourd'hui",
+    "email": "Email",
+    "password": "Mot de Passe",
+    "confirmPassword": "Confirmer le Mot de Passe",
+    "fullName": "Nom Complet",
+    "forgotPassword": "Mot de passe oublié?",
+    "rememberMe": "Se souvenir de moi",
+    "noAccount": "Vous n'avez pas de compte?",
+    "hasAccount": "Vous avez déjà un compte?",
+    "signInHere": "Connectez-vous ici",
+    "signUpHere": "Inscrivez-vous ici",
+    "or": "OU",
+    "loginButton": "Se Connecter",
+    "registerButton": "Créer un Compte",
+    "loggingIn": "Connexion...",
+    "registering": "Création du compte..."
+  },
+  "home": {
+    "hero": {
+      "title": "Transformez Votre Parcours Fitness",
+      "subtitle": "Connectez-vous avec des coachs certifiés qui vous guideront vers vos objectifs fitness",
+      "ctaPrimary": "Trouvez Votre Coach",
+      "ctaSecondary": "Devenez Coach"
+    },
+    "features": {
+      "title": "Pourquoi Choisir Mandara Fitness",
+      "certifiedCoaches": {
+        "title": "Coachs Certifiés",
+        "description": "Tous les coachs sont des professionnels vérifiés et certifiés"
+      },
+      "personalizedTraining": {
+        "title": "Entraînement Personnalisé",
+        "description": "Obtenez des programmes sur mesure conçus pour vos objectifs spécifiques"
+      },
+      "liveChat": {
+        "title": "Chat en Temps Réel",
+        "description": "Connectez-vous instantanément avec votre coach à tout moment, n'importe où"
+      }
+    },
+    "howItWorks": {
+      "title": "Comment Ça Marche",
+      "step1": {
+        "title": "Créer un Profil",
+        "description": "Inscrivez-vous et parlez-nous de vos objectifs fitness"
+      },
+      "step2": {
+        "title": "Trouvez Votre Coach",
+        "description": "Parcourez les coachs certifiés et trouvez votre match parfait"
+      },
+      "step3": {
+        "title": "Commencez l'Entraînement",
+        "description": "Connectez-vous avec votre coach et commencez votre transformation"
+      }
+    },
+    "cta": {
+      "title": "Prêt à Vous Transformer?",
+      "subtitle": "Rejoignez des milliers de personnes atteignant leurs objectifs fitness",
+      "button": "Commencez Maintenant"
+    }
+  },
+  "coach": {
+    "browse": {
+      "title": "Trouvez Votre Coach Parfait",
+      "subtitle": "Parcourez les professionnels du fitness certifiés",
+      "noCoaches": "Aucun coach trouvé",
+      "filterByDiscipline": "Filtrer par Discipline",
+      "allDisciplines": "Toutes les Disciplines"
+    },
+    "profile": {
+      "about": "À Propos",
+      "discipline": "Discipline",
+      "experience": "Expérience",
+      "certifications": "Certifications",
+      "gallery": "Galerie",
+      "contactCoach": "Contacter le Coach",
+      "startChat": "Démarrer une Conversation"
+    },
+    "onboarding": {
+      "title": "Devenez Coach",
+      "subtitle": "Partagez votre expertise et aidez les autres à atteindre leurs objectifs",
+      "step1Title": "Informations de Base",
+      "step2Title": "Certifications",
+      "step3Title": "Portfolio",
+      "disciplineLabel": "Votre Discipline",
+      "disciplinePlaceholder": "ex: Yoga, Musculation, CrossFit",
+      "bioLabel": "Bio",
+      "bioPlaceholder": "Parlez-nous de vous et de votre philosophie de coaching",
+      "portfolioLabel": "URL du Portfolio",
+      "portfolioPlaceholder": "https://votreportfolio.com",
+      "certificatesLabel": "Télécharger les Certificats",
+      "imagesLabel": "Télécharger des Photos",
+      "videosLabel": "Télécharger des Vidéos",
+      "submitButton": "Soumettre pour Révision",
+      "submitting": "Soumission...",
+      "successMessage": "Candidature soumise avec succès! Nous l'examinerons bientôt.",
+      "pendingStatus": "Votre candidature est en cours d'examen",
+      "approvedStatus": "Félicitations! Vous êtes maintenant un coach approuvé",
+      "rejectedStatus": "Votre candidature n'a pas été approuvée"
+    }
+  },
+  "prospect": {
+    "onboarding": {
+      "title": "Complétez Votre Profil",
+      "subtitle": "Aidez-nous à personnaliser votre expérience",
+      "ageRangeLabel": "Tranche d'Âge",
+      "heightLabel": "Taille (cm)",
+      "weightLabel": "Poids (kg)",
+      "goalsLabel": "Objectifs Fitness",
+      "completeButton": "Compléter le Profil",
+      "completing": "Enregistrement..."
+    },
+    "dashboard": {
+      "title": "Bon Retour",
+      "myCoaches": "Mes Coachs",
+      "recentChats": "Conversations Récentes",
+      "browseCoaches": "Découvrir de Nouveaux Coachs"
+    }
+  },
+  "chat": {
+    "title": "Messages",
+    "startConversation": "Démarrer une Conversation",
+    "typeMessage": "Tapez votre message...",
+    "send": "Envoyer",
+    "noMessages": "Pas encore de messages",
+    "online": "En Ligne",
+    "offline": "Hors Ligne",
+    "typing": "en train d'écrire..."
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Tableau de Bord Admin",
+      "pendingCoaches": "Candidatures de Coach en Attente",
+      "totalUsers": "Utilisateurs Totaux",
+      "totalCoaches": "Coachs Totaux",
+      "activeChats": "Conversations Actives"
+    },
+    "coachReview": {
+      "title": "Examiner la Candidature du Coach",
+      "approve": "Approuver",
+      "reject": "Rejeter",
+      "rejectionReason": "Raison du Rejet",
+      "rejectionReasonPlaceholder": "Veuillez fournir une raison pour le rejet",
+      "approving": "Approbation...",
+      "rejecting": "Rejet...",
+      "successApproved": "Coach approuvé avec succès",
+      "successRejected": "Coach rejeté"
+    }
+  },
+  "errors": {
+    "generic": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "invalidEmail": "Veuillez entrer une adresse email valide",
+    "invalidPassword": "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "required": "Ce champ est requis",
+    "unauthorized": "Vous n'êtes pas autorisé à effectuer cette action",
+    "notFound": "La ressource demandée n'a pas été trouvée",
+    "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+  },
+  "success": {
+    "profileUpdated": "Profil mis à jour avec succès",
+    "messageSent": "Message envoyé",
+    "applicationSubmitted": "Candidature soumise avec succès"
+  }
+}

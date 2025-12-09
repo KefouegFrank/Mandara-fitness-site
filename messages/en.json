@@ -1,0 +1,199 @@
+{
+  "common": {
+    "appName": "Mandara Fitness",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "viewMore": "View More",
+    "learnMore": "Learn More"
+  },
+  "nav": {
+    "home": "Home",
+    "coaches": "Find Coaches",
+    "about": "About",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "signUp": "Sign Up"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "loginSubtitle": "Sign in to your account",
+    "registerTitle": "Join Mandara Fitness",
+    "registerSubtitle": "Start your fitness journey today",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "fullName": "Full Name",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember me",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signInHere": "Sign in here",
+    "signUpHere": "Sign up here",
+    "or": "OR",
+    "loginButton": "Sign In",
+    "registerButton": "Create Account",
+    "loggingIn": "Signing in...",
+    "registering": "Creating account..."
+  },
+  "home": {
+    "hero": {
+      "title": "Transform Your Fitness Journey",
+      "subtitle": "Connect with certified coaches who will guide you to achieve your fitness goals",
+      "ctaPrimary": "Find Your Coach",
+      "ctaSecondary": "Become a Coach"
+    },
+    "features": {
+      "title": "Why Choose Mandara Fitness",
+      "certifiedCoaches": {
+        "title": "Certified Coaches",
+        "description": "All coaches are verified and certified professionals"
+      },
+      "personalizedTraining": {
+        "title": "Personalized Training",
+        "description": "Get tailored programs designed for your specific goals"
+      },
+      "liveChat": {
+        "title": "Real-time Chat",
+        "description": "Connect instantly with your coach anytime, anywhere"
+      }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1": {
+        "title": "Create Profile",
+        "description": "Sign up and tell us about your fitness goals"
+      },
+      "step2": {
+        "title": "Find Your Coach",
+        "description": "Browse certified coaches and find your perfect match"
+      },
+      "step3": {
+        "title": "Start Training",
+        "description": "Connect with your coach and begin your transformation"
+      }
+    },
+    "cta": {
+      "title": "Ready to Transform?",
+      "subtitle": "Join thousands of people achieving their fitness goals",
+      "button": "Get Started Now"
+    }
+  },
+  "coach": {
+    "browse": {
+      "title": "Find Your Perfect Coach",
+      "subtitle": "Browse certified fitness professionals",
+      "noCoaches": "No coaches found",
+      "filterByDiscipline": "Filter by Discipline",
+      "allDisciplines": "All Disciplines"
+    },
+    "profile": {
+      "about": "About",
+      "discipline": "Discipline",
+      "experience": "Experience",
+      "certifications": "Certifications",
+      "gallery": "Gallery",
+      "contactCoach": "Contact Coach",
+      "startChat": "Start Chat"
+    },
+    "onboarding": {
+      "title": "Become a Coach",
+      "subtitle": "Share your expertise and help others achieve their goals",
+      "step1Title": "Basic Information",
+      "step2Title": "Credentials",
+      "step3Title": "Portfolio",
+      "disciplineLabel": "Your Discipline",
+      "disciplinePlaceholder": "e.g., Yoga, Strength Training, CrossFit",
+      "bioLabel": "Bio",
+      "bioPlaceholder": "Tell us about yourself and your coaching philosophy",
+      "portfolioLabel": "Portfolio URL",
+      "portfolioPlaceholder": "https://yourportfolio.com",
+      "certificatesLabel": "Upload Certificates",
+      "imagesLabel": "Upload Photos",
+      "videosLabel": "Upload Videos",
+      "submitButton": "Submit for Review",
+      "submitting": "Submitting...",
+      "successMessage": "Application submitted successfully! We'll review it shortly.",
+      "pendingStatus": "Your application is pending review",
+      "approvedStatus": "Congratulations! You're now an approved coach",
+      "rejectedStatus": "Your application was not approved"
+    }
+  },
+  "prospect": {
+    "onboarding": {
+      "title": "Complete Your Profile",
+      "subtitle": "Help us personalize your experience",
+      "ageRangeLabel": "Age Range",
+      "heightLabel": "Height (cm)",
+      "weightLabel": "Weight (kg)",
+      "goalsLabel": "Fitness Goals",
+      "completeButton": "Complete Profile",
+      "completing": "Saving..."
+    },
+    "dashboard": {
+      "title": "Welcome Back",
+      "myCoaches": "My Coaches",
+      "recentChats": "Recent Conversations",
+      "browseCoaches": "Discover New Coaches"
+    }
+  },
+  "chat": {
+    "title": "Messages",
+    "startConversation": "Start a Conversation",
+    "typeMessage": "Type your message...",
+    "send": "Send",
+    "noMessages": "No messages yet",
+    "online": "Online",
+    "offline": "Offline",
+    "typing": "typing..."
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "pendingCoaches": "Pending Coach Applications",
+      "totalUsers": "Total Users",
+      "totalCoaches": "Total Coaches",
+      "activeChats": "Active Chats"
+    },
+    "coachReview": {
+      "title": "Review Coach Application",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectionReason": "Rejection Reason",
+      "rejectionReasonPlaceholder": "Please provide a reason for rejection",
+      "approving": "Approving...",
+      "rejecting": "Rejecting...",
+      "successApproved": "Coach approved successfully",
+      "successRejected": "Coach rejected"
+    }
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "invalidEmail": "Please enter a valid email address",
+    "invalidPassword": "Password must be at least 8 characters",
+    "passwordMismatch": "Passwords do not match",
+    "required": "This field is required",
+    "unauthorized": "You are not authorized to perform this action",
+    "notFound": "The requested resource was not found",
+    "networkError": "Network error. Please check your connection."
+  },
+  "success": {
+    "profileUpdated": "Profile updated successfully",
+    "messageSent": "Message sent",
+    "applicationSubmitted": "Application submitted successfully"
+  }
+}
