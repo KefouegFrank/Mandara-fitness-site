@@ -39,12 +39,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.0.1
- * Query Engine version: f09f2815f091dbba658cdcd2264306d88bb5bda6
+ * Prisma Client JS version: 7.1.0
+ * Query Engine version: ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba
  */
 Prisma.prismaVersion = {
-  client: "7.0.1",
-  engine: "f09f2815f091dbba658cdcd2264306d88bb5bda6"
+  client: "7.1.0",
+  engine: "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -225,8 +225,8 @@ exports.Prisma.ModelName = {
  */
 const config = {
   "previewFeatures": [],
-  "clientVersion": "7.0.1",
-  "engineVersion": "f09f2815f091dbba658cdcd2264306d88bb5bda6",
+  "clientVersion": "7.1.0",
+  "engineVersion": "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
   "activeProvider": "postgresql",
   "inlineSchema": "// schema.prisma (Postgres)\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id            Int            @id @default(autoincrement())\n  email         String         @unique\n  password      String\n  role          UserRole       @default(PROSPECT) // PROSPECT | COACH | ADMIN\n  name          String?\n  createdAt     DateTime       @default(now())\n  updatedAt     DateTime       @updatedAt\n  coachProfile  CoachProfile?\n  clientProfile ClientProfile?\n  messagesSent  Message[]      @relation(\"senderMessages\")\n  medias        Media[]\n  adminReviews  AdminReview[]\n}\n\nenum UserRole {\n  PROSPECT\n  COACH\n  ADMIN\n}\n\nmodel CoachProfile {\n  id             Int             @id @default(autoincrement())\n  userId         Int             @unique\n  user           User            @relation(fields: [userId], references: [id])\n  bio            String?\n  discipline     String\n  portfolio      String? // free text / resume\n  status         ApprovalStatus  @default(PENDING) // PENDING, APPROVED, REJECTED\n  statusReason   String?\n  createdAt      DateTime        @default(now())\n  updatedAt      DateTime        @updatedAt\n  media          Media[]\n  chatsAsCoach   Chat[]          @relation(\"coachChats\")\n  adminReviews   AdminReview[]\n  commissionLogs CommissionLog[]\n}\n\nmodel ClientProfile {\n  id        Int      @id @default(autoincrement())\n  userId    Int      @unique\n  user      User     @relation(fields: [userId], references: [id])\n  ageRange  String? // e.g., \"25-34\"\n  heightCm  Int?\n  weightKg  Int?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  chats     Chat[]   @relation(\"clientChats\")\n}\n\nenum ApprovalStatus {\n  PENDING\n  APPROVED\n  REJECTED\n}\n\nmodel Media {\n  id          Int           @id @default(autoincrement())\n  ownerId     Int?\n  owner       User?         @relation(fields: [ownerId], references: [id])\n  coachId     Int?\n  coach       CoachProfile? @relation(fields: [coachId], references: [id])\n  url         String // S3 URL or CDN URL\n  type        MediaType\n  mimeType    String\n  sizeBytes   Int?\n  description String?\n  createdAt   DateTime      @default(now())\n}\n\nenum MediaType {\n  CERTIFICATE\n  IMAGE\n  VIDEO\n  OTHER\n}\n\nmodel Chat {\n  id        Int           @id @default(autoincrement())\n  coachId   Int\n  coach     CoachProfile  @relation(\"coachChats\", fields: [coachId], references: [id])\n  clientId  Int\n  client    ClientProfile @relation(\"clientChats\", fields: [clientId], references: [id])\n  messages  Message[]\n  createdAt DateTime      @default(now())\n  updatedAt DateTime      @updatedAt\n\n  @@index([coachId])\n  @@index([clientId])\n}\n\nmodel Message {\n  id        Int      @id @default(autoincrement())\n  chatId    Int\n  chat      Chat     @relation(fields: [chatId], references: [id])\n  senderId  Int\n  sender    User     @relation(\"senderMessages\", fields: [senderId], references: [id])\n  content   String\n  isRead    Boolean  @default(false)\n  createdAt DateTime @default(now())\n}\n\nmodel AdminReview {\n  id        Int          @id @default(autoincrement())\n  coachId   Int\n  coach     CoachProfile @relation(fields: [coachId], references: [id])\n  adminId   Int\n  admin     User         @relation(fields: [adminId], references: [id])\n  action    ReviewAction\n  comment   String?\n  createdAt DateTime     @default(now())\n}\n\nenum ReviewAction {\n  APPROVED\n  REJECTED\n  PENDING\n}\n\nmodel CommissionLog {\n  id        Int          @id @default(autoincrement())\n  coachId   Int\n  coach     CoachProfile @relation(fields: [coachId], references: [id])\n  amount    Decimal      @db.Decimal(10, 2)\n  reference String? // external reference when payments are integrated\n  note      String?\n  createdAt DateTime     @default(now())\n}\n"
 }
