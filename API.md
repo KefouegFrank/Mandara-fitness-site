@@ -77,7 +77,6 @@ Create a new user account.
 ```json
 {
   "success": true,
-  "message": "User created successfully",
   "userId": 123
 }
 ```
@@ -88,7 +87,18 @@ Create a new user account.
   "success": false,
   "error": {
     "code": "VALIDATION_ERROR",
-    "message": "Invalid input data"
+    "message": "Invalid email format"
+  }
+}
+```
+
+**Response (409):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ALREADY_EXISTS",
+    "message": "Email already registered"
   }
 }
 ```
@@ -154,11 +164,37 @@ Update the authenticated user's profile.
 }
 ```
 
+**Validation Rules:**
+- heightCm: Must be a positive number if provided
+- weightKg: Must be a positive number if provided
+
 **Response (200):**
 ```json
 {
   "success": true,
-  "message": "Profile updated successfully"
+  "profile": {
+    "user": {
+      "id": 123,
+      "name": "John Doe Updated",
+      "email": "user@example.com"
+    },
+    "prospect": {
+      "ageRange": "25-34",
+      "heightCm": 180,
+      "weightKg": 75
+    }
+  }
+}
+```
+
+**Response (400):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "heightCm must be a positive number"
+  }
 }
 ```
 
@@ -179,6 +215,11 @@ Submit coach onboarding information (requires PROSPECT role).
 }
 ```
 
+**Validation Rules:**
+- discipline: Required string
+- bio: Required string
+- portfolio: Required, valid URL format
+
 **Response (201):**
 ```json
 {
@@ -187,6 +228,28 @@ Submit coach onboarding information (requires PROSPECT role).
     "id": 456,
     "status": "PENDING",
     "createdAt": "2025-01-15T10:30:00Z"
+  }
+}
+```
+
+**Response (400):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid URL format"
+  }
+}
+```
+
+**Response (409):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ALREADY_EXISTS",
+    "message": "Coach profile already exists"
   }
 }
 ```
@@ -297,7 +360,22 @@ Approve a coach application.
 ```json
 {
   "success": true,
-  "message": "Coach approved successfully"
+  "coach": {
+    "id": 2,
+    "userId": 124,
+    "status": "APPROVED",
+    "approvedAt": "2025-01-15T10:45:00Z"
+  }
+}
+```
+
+**Response (404):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "NOT_FOUND"
+  }
 }
 ```
 
@@ -314,6 +392,9 @@ Reject a coach application.
 }
 ```
 
+**Validation Rules:**
+- reason: Required, minimum 5 characters
+
 **Parameters:**
 - `coachId` (path): Coach profile ID
 
@@ -321,7 +402,34 @@ Reject a coach application.
 ```json
 {
   "success": true,
-  "message": "Coach rejected successfully"
+  "coach": {
+    "id": 2,
+    "userId": 124,
+    "status": "REJECTED",
+    "statusReason": "Portfolio does not meet requirements",
+    "updatedAt": "2025-01-15T11:00:00Z"
+  }
+}
+```
+
+**Response (400):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Rejection reason must be at least 5 characters"
+  }
+}
+```
+
+**Response (404):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "NOT_FOUND"
+  }
 }
 ```
 
@@ -331,15 +439,17 @@ Reject a coach application.
 
 ### POST /api/chat
 
-Create a new chat between coach and client (requires COACH or PROSPECT role).
+Initiate a new chat between a prospect and a coach (requires PROSPECT role).
 
 **Request:**
 ```json
 {
-  "coachId": 1,
-  "clientId": 5
+  "coachId": 1
 }
 ```
+
+**Validation Rules:**
+- coachId: Required, must be a positive integer
 
 **Response (201):**
 ```json
@@ -350,6 +460,17 @@ Create a new chat between coach and client (requires COACH or PROSPECT role).
     "coachId": 1,
     "clientId": 5,
     "createdAt": "2025-01-15T10:30:00Z"
+  }
+}
+```
+
+**Response (404):**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Prospect profile not found"
   }
 }
 ```
