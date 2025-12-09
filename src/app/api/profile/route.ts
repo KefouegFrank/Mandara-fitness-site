@@ -53,11 +53,30 @@ export async function GET(req: Request) {
  */
 export async function PUT(req: Request) {
     const payload = requireAuth(req);
-    if (!payload) return NextResponse.json({ success: false, error: { code: 'UNAUTHORIZED' } }, { status: 401 });
+    if (!payload) {
+        return NextResponse.json({
+            success: false,
+            error: { code: 'UNAUTHORIZED', message: 'Authentication required' }
+        }, { status: 401 });
+    }
 
     try {
         const body = await req.json();
         const { name, ageRange, heightCm, weightKg, bio, discipline, portfolio } = body;
+
+        // Validate numeric fields if provided
+        if (heightCm !== undefined && (typeof heightCm !== 'number' || heightCm <= 0)) {
+            return NextResponse.json({
+                success: false,
+                error: { code: 'VALIDATION_ERROR', message: 'heightCm must be a positive number' }
+            }, { status: 400 });
+        }
+        if (weightKg !== undefined && (typeof weightKg !== 'number' || weightKg <= 0)) {
+            return NextResponse.json({
+                success: false,
+                error: { code: 'VALIDATION_ERROR', message: 'weightKg must be a positive number' }
+            }, { status: 400 });
+        }
 
         // Update user base fields
         const user = await prisma.user.update({

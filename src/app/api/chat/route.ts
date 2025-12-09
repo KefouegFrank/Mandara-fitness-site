@@ -1,20 +1,30 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
+import { parseRequestBody, InitiateChatRequestSchema } from '@/lib/schemas';
 
 /**
- * POST /api/chat/initiate
+ * POST /api/chat
  * Initiate a new 1:1 chat between a prospect and a coach.
  * Creates a Chat record if not already exists.
  */
 export async function POST(req: Request) {
+    // Validate authentication
     const payload = requireAuth(req, ['PROSPECT']);
-    if (!payload) return NextResponse.json({ success: false, error: { code: 'UNAUTHORIZED' } }, { status: 401 });
-
-    const { coachId } = await req.json();
-    if (!coachId) {
-        return NextResponse.json({ success: false, error: { code: 'INVALID_INPUT', message: 'coachId required' } }, { status: 400 });
+    if (!payload) {
+        return NextResponse.json({
+            success: false,
+            error: { code: 'UNAUTHORIZED', message: 'Authentication required' }
+        }, { status: 401 });
     }
+
+    // Validate request body using Zod schema
+    const { data, error } = await parseRequestBody(req, InitiateChatRequestSchema);
+    if (error) {
+        return NextResponse.json({ success: false, error }, { status: 400 });
+    }
+
+    const { coachId } = data;
 
     try {
         // Get prospect profile

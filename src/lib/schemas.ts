@@ -57,6 +57,12 @@ export type CoachOnboarding = z.infer<typeof CoachOnboardingSchema>;
 
 // ============ Chat Schemas ============
 
+export const InitiateChatRequestSchema = z.object({
+    coachId: z.number().int().positive('Valid coach ID required'),
+});
+
+export type InitiateChatRequest = z.infer<typeof InitiateChatRequestSchema>;
+
 export const CreateChatRequestSchema = z.object({
     coachId: z.number().int().positive('Valid coach ID required'),
     clientId: z.number().int().positive('Valid client ID required'),
